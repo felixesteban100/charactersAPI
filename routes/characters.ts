@@ -12,8 +12,8 @@ const {
     // deleteMember
 } = require('../controllers/characters')
 
-/* routerCharacters.route('/')
-.get(getAllCharacters) */
+routerCharacters.route('/')
+.get(getAllCharacters)
 
 // .post(postMember)
 // .get(getAllMembers)

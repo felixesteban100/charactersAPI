@@ -11,10 +11,10 @@ import { filterCharacters } from '../functions';
 //     };
 // }
 
-/* async function getAllCharacters(req: Request, res: Response) {
+async function getAllCharacters(req: Request, res: Response) {
     const characters = await Character.find({})
     res.status(StatusCodes.OK).json(characters)
-} */
+}
 
 async function getFilteredCharacters(req: Request, res: Response) {
     let { characterName, howMany, side, universe, team, gender, race, includeNameOrExactName, characterOrFullName } = req.query
@@ -39,6 +39,6 @@ async function getFilteredCharacters(req: Request, res: Response) {
 
 
 module.exports = {
-    // getAllCharacters,
+    getAllCharacters,
     getFilteredCharacters
 }
