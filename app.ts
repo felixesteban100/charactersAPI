@@ -1,6 +1,6 @@
 require('dotenv').config()
 require('express-async-errors')
-import { Request, Response, NextFunction  } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 // extra security package
 const helmet = require('helmet')
@@ -47,9 +47,15 @@ app.use(helmet())
 app.use(cors())
 app.use(xss())
 
+app.use(express.static('src'))
+
 // routes
 // app.use('/api/v1/auth', authRouter)
 // app.use('/api/v1/characters', authenticateUser, charactersRouter)
+
+app.get('/', (req: Request, res: Response) => {
+    res.sendFile('index.html', { root: 'src' })
+})
 app.use('/api/v1/characters', charactersRouter)
 
 //using own middleware
