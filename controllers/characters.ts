@@ -17,7 +17,7 @@ async function getAllCharacters(req: Request, res: Response) {
 }
 
 async function getLast5Characters(req: Request, res: Response) {
-    const characters = await Character.find({})
+    const characters = await Character.find({}).limit(5)
     res.status(StatusCodes.OK).json(characters)
 }
 
