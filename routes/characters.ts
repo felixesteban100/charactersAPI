@@ -2,7 +2,8 @@ const expressModule = require('express')
 const routerCharacters = expressModule.Router()
 
 const {
-    getAllCharacters,
+    // getAllCharacters,
+    getLast5Characters,
     getFilteredCharacters
 
     // getAllMembers,
@@ -13,7 +14,8 @@ const {
 } = require('../controllers/characters')
 
 routerCharacters.route('/')
-.get(getAllCharacters)
+// .get(getAllCharacters)
+.get(getLast5Characters)
 
 // .post(postMember)
 // .get(getAllMembers)

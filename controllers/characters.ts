@@ -16,6 +16,11 @@ async function getAllCharacters(req: Request, res: Response) {
     res.status(StatusCodes.OK).json(characters)
 }
 
+async function getLast5Characters(req: Request, res: Response) {
+    const characters = await Character.find({})
+    res.status(StatusCodes.OK).json(characters)
+}
+
 async function getFilteredCharacters(req: Request, res: Response) {
     let { characterName, howMany, side, universe, team, gender, race, includeNameOrExactName, characterOrFullName } = req.query
     const allCharacters = await Character.find({})
@@ -40,5 +45,6 @@ async function getFilteredCharacters(req: Request, res: Response) {
 
 module.exports = {
     getAllCharacters,
+    getLast5Characters,
     getFilteredCharacters
 }
