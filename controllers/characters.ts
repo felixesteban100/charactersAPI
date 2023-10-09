@@ -51,7 +51,12 @@ async function getCharactersById(req: Request, res: Response){
     const { ids } = req.query
     
     if(typeof ids === 'string' && JSON.parse(ids).length > 0){
-        const founded = allCharacters.filter(c => JSON.parse(ids).includes(c.id))
+        const founded = JSON
+        .parse(ids)
+        .replace(/\[|\]/g,'')
+        .split(',')
+        .map((idC: string) => allCharacters.find(c => c.id === parseInt(idC)))
+        
         res.status(StatusCodes.OK).json(founded)
         // res.status(StatusCodes.OK).json([])
     }else{
