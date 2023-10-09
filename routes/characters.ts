@@ -4,8 +4,9 @@ const routerCharacters = expressModule.Router()
 const {
     // getAllCharacters,
     getLast5Characters,
-    getFilteredCharacters
+    getFilteredCharacters,
 
+    getCharactersById
     // getAllMembers,
     // getSingleMember,
     // postMember,
@@ -25,6 +26,8 @@ routerCharacters.route('/')
 // .patch(patchMember)
 // .delete(deleteMember)
 
+routerCharacters.route('/charactersids')
+.get(getCharactersById)
 
 routerCharacters
 // .route('/filter/:howMany/:side/:universe/:team/:gender/:race/:includeNameOrExactName/:characterOrFullName/:characterName')

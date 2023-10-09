@@ -3,6 +3,7 @@ const Character = require('../models/Character')
 import { Request, Response } from 'express';
 import { StatusCodes } from "http-status-codes"
 import { filterCharacters } from '../functions';
+import { Character } from '../types';
 // const { BadRequestError, NotFoundError } = require('../errors/index')
 
 // interface CustomRequest extends Request {
@@ -11,19 +12,21 @@ import { filterCharacters } from '../functions';
 //     };
 // }
 
-async function getAllCharacters(req: Request, res: Response) {
+/* async function getAllCharacters(req: Request, res: Response) {
     const characters = await Character.find({})
     res.status(StatusCodes.OK).json(characters)
-}
+} */
 
 async function getLast5Characters(req: Request, res: Response) {
     const characters = await Character.find({}).limit(5)
+    console.log("ok")
+
     res.status(StatusCodes.OK).json(characters)
 }
 
 async function getFilteredCharacters(req: Request, res: Response) {
-    let { characterName, howMany, side, universe, team, gender, race, includeNameOrExactName, characterOrFullName } = req.query
-    const allCharacters = await Character.find({})
+    const { characterName, howMany, side, universe, team, gender, race, includeNameOrExactName, characterOrFullName } = req.query
+    const allCharacters: Character[] = await Character.find({})
 
     // console.table({ characterName, howMany, side, universe, team, gender, race, includeNameOrExactName, characterOrFullName })
 
@@ -42,9 +45,24 @@ async function getFilteredCharacters(req: Request, res: Response) {
     res.status(StatusCodes.OK).json(charactersFounded)
 }
 
+async function getCharactersById(req: Request, res: Response){
+    const allCharacters: Character[] = await Character.find({})
+
+    const { ids } = req.query
+    
+    if(typeof ids === 'string' && JSON.parse(ids).length > 0){
+        const founded = allCharacters.filter(c => JSON.parse(ids).includes(c.id))
+        res.status(StatusCodes.OK).json(founded)
+        // res.status(StatusCodes.OK).json([])
+    }else{
+        res.status(StatusCodes.OK).json([])
+    }
+}
+
 
 module.exports = {
-    getAllCharacters,
+    // getAllCharacters,
     getLast5Characters,
-    getFilteredCharacters
+    getFilteredCharacters,
+    getCharactersById
 }
